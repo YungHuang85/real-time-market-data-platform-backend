@@ -2,11 +2,9 @@
 Real-time stock and cryptocurrency market data platform built with Spring Boot microservices and React. Powered by Apache Kafka for event streaming, Redis for real-time caching, and WebSocket for live data delivery to the dashboard.
 
 Microservices Architecture：
-
   #quote-service
   
     *Responsibilities*
-    
       - Receive real-time price streams
       - Publish market price events to Kafka
       - Provide REST APIs for market data
@@ -21,6 +19,7 @@ Microservices Architecture：
       - Binance API
   
    #candle-service
+   
     *Responsibilities*
       - Provide historical candlestick (K-line) data
       - Serve chart data for frontend visualization
@@ -29,6 +28,7 @@ Microservices Architecture：
       - AlphaVantage API
   
    #gateway-service
+   
     *Responsibilities*
       - Central API Gateway
       - Route requests to microservices
@@ -37,6 +37,7 @@ Microservices Architecture：
 
 
 Technology Stack：
+
   *Backend*
     - Java
     - Spring Boot
