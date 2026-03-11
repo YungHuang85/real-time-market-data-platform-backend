@@ -20,6 +20,7 @@ Microservices Architecture：
     *Responsibilities*
       - Provide historical candlestick (K-line) data
       - Serve chart data for frontend visualization
+      
     *Data Source*
       - AlphaVantage API
   
