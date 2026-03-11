@@ -4,9 +4,11 @@ Real-time stock and cryptocurrency market data platform built with Spring Boot m
 Microservices Architecture：
   #quote-service
     *Responsibilities*
+    
       - Receive real-time price streams
       - Publish market price events to Kafka
       - Provide REST APIs for market data
+      
     *APIs*
       - Company profile  
       - Financial metrics  
