@@ -39,18 +39,21 @@ Microservices Architecture：
 
 Technology Stack：
 
-  *Backend*
+  #Backend
+  
     - Java
     - Spring Boot
     - Spring WebSocket
     - Spring Kafka
 
-  *Frontend*
+  #Frontend
+  
     - React
     - TypeScript
     - Lightweight Charts
 
-  *Infrastructure*
+  #Infrastructure
+  
     - Apache Kafka
     - Redis
     - Docker
