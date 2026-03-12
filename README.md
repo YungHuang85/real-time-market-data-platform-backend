@@ -88,3 +88,12 @@ The system uses **Apache Kafka** for event streaming, **Redis** for real-time ca
 - Analyst recommendation aggregation
 - Market news integration
 - Event-driven microservice architecture
+
+## Architecture Highlights
+
+- Microservices architecture
+- Event-driven system design
+- Real-time market data streaming
+- Kafka-based event pipeline
+- WebSocket live dashboard updates
+- Redis real-time cache layer
