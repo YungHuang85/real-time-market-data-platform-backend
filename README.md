@@ -129,20 +129,21 @@ real-time-market-data-platform
                           |                            |                         |
                           |                            |                         |
                           v                            v                         v
-                  +----------------+          +----------------+        +----------------+
-                  | candle-service |          | candle-service |        | quote-service  |
-                  |  (AlphaVantage |          |  (Binance K線) |        |  (公司/財報/    |
-                  |   日 K 線)     |          |                |        |   新聞/即時價)  |
-                  +----------------+          +----------------+        +----------------+
+                  +----------------+          +-----------------+        +-----------------+
+                  | candle-service |          | candle-service  |        | quote-service   |
+                  |  (AlphaVantage |          | (Binance K-Line)|        |(Company/        |
+                  |                |          |                 |        |Financials/News/ |
+                  |  Daily K-Line) |          |                 |        |Real-time Price) |
+                  +----------------+          +-----------------+        +-----------------+
                           |                            |                         |
                           | REST: /api/candles/{symbol}|                         |
-                          | (回傳 K 線資料)             |                         |
+                          | (Return candlestick data)  |                         |
                           |                            |                         |
                           +-------------+--------------+-------------------------+
                                         |
-                                        |   (未來可由 front-end 視需要呼叫)
+                                        |   (Can be called by the frontend when needed)
                                         v
-           [Kafka: stock.raw topic]  <----  (這部分通常由另一個 quote producer 或外部 feed 寫入)
+           [Kafka: stock.raw topic]  <----  (This part is usually written by another quote producer or external data feed)
                       |
                       v
              +------------------+           +----------------------+         +----------------------+
@@ -150,7 +151,7 @@ real-time-market-data-platform
              | (gateway-service)|  Kafka    | (gateway-service)    |  set    |  key: price:SYMBOL   |
              +------------------+  consume  +----------------------+         +----------------------+
                       |
-                      | WebSocket 推播 (/topic/price, /topic/price/{symbol})
+                      | WebSocket push (/topic/price, /topic/price/{symbol})
                       v
              +----------------------+
              |  WebSocketConfig     |
@@ -163,12 +164,12 @@ real-time-market-data-platform
                       |      |  GET /api/price/{symbol}            |
                       |      |  GET /api/price                     |
                       v      +-------------------------------------+
-             +----------------------+                      +---------------------+
-             |    gateway-service   |  <-----------------> |   Frontend (React)  |
-             |  (API + WebSocket    |    CORS: http://     |  - 呼叫 /api/price  |
-             |   對外出口)           |    localhost:5173    |  - 連線 /ws + 訂閱  |
-             +----------------------+                      |    /topic/price...  |
-                                                           +---------------------+
+             +----------------------+                      +---------------------------+
+             |    gateway-service   |  <-----------------> |   Frontend (React)        |
+             |  (API + WebSocket    |    CORS: http://     | - Call /api/price         |
+             |   external entry)    |    localhost:5173    | - Connect /ws + subscribe |
+             +----------------------+                      |   /topic/price...        |
+                                                           +---------------------------+
 
 
 # Technology Stack
