@@ -132,8 +132,8 @@ real-time-market-data-platform
                   +----------------+          +-----------------+        +-----------------+
                   | candle-service |          | candle-service  |        | quote-service   |
                   |  (AlphaVantage |          | (Binance K-Line)|        |(Company/        |
-                  |                |          |                 |        |Financials/News/ |
-                  |  Daily K-Line) |          |                 |        |Real-time Price) |
+                  | Daily K-Line)  |          |                 |        |Financials/News/ |
+                  |                |          |                 |        |Real-time Price) |
                   +----------------+          +-----------------+        +-----------------+
                           |                            |                         |
                           | REST: /api/candles/{symbol}|                         |
