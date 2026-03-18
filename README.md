@@ -202,7 +202,7 @@ flowchart TB
 - Market news integration
 - Event-driven microservice architecture
 
-## Architecture Highlights
+# Architecture Highlights
 
 - Microservices architecture
 - Event-driven system design
