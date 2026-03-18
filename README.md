@@ -47,7 +47,7 @@ The system uses Apache Kafka for event streaming, Redis for real-time caching, a
 - Unified API entry point for frontend
 
 ---
-## Project Structure
+# Project Structure
 
 ```text
 real-time-market-data-platform
