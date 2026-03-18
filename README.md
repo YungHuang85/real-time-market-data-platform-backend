@@ -160,13 +160,15 @@ flowchart TB
     CS --> BN
 
 ```
-quote-service is responsible for real-time quote subscription, as well as retrieving company information, financial metrics, news, and recommendation data, and publishing real-time quotes to Kafka.
 
-gateway-service is responsible for consuming quote events from Kafka, storing the latest price data in Redis cache, and providing data to the frontend through REST APIs and WebSocket.
+- `quote-service` is responsible for real-time quote subscription, retrieving company information, financial metrics, news, and recommendation data, and publishing real-time quotes to Kafka.
 
-candle-service is responsible for providing candlestick data, using Alpha Vantage for stock market data and Binance for cryptocurrency data.
+- `gateway-service` is responsible for consuming quote events from Kafka, storing the latest price data in Redis cache, and delivering data to the frontend through REST APIs and WebSocket.
 
-Kafka serves as the event bus for real-time quote streaming, while Redis serves as the cache layer for the latest price data.
+- `candle-service` is responsible for providing candlestick data, using Alpha Vantage for stock market data and Binance for cryptocurrency data.
+
+- `Kafka` serves as the event bus for real-time quote streaming, while `Redis` serves as the cache layer for the latest price data.
+
 
 
 # Technology Stack
