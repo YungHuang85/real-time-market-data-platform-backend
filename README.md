@@ -125,52 +125,41 @@ real-time-market-data-platform
 ```
 
 
-                    [Alpha Vantage]                 [Binance]                 [Finnhub]
-                          |                            |                         |
-                          |                            |                         |
-                          v                            v                         v
-                  +----------------+          +-----------------+        +-----------------+
-                  | candle-service |          | candle-service  |        | quote-service   |
-                  |  (AlphaVantage |          | (Binance K-Line)|        |(Company/        |
-                  | Daily K-Line)  |          |                 |        |Financials/News/ |
-                  |                |          |                 |        |Real-time Price) |
-                  +----------------+          +-----------------+        +-----------------+
-                          |                            |                         |
-                          | REST: /api/candles/{symbol}|                         |
-                          | (Return candlestick data)  |                         |
-                          |                            |                         |
-                          +-------------+--------------+-------------------------+
-                                        |
-                                        |   (Can be called by the frontend when needed)
-                                        v
-           [Kafka: stock.raw topic]  <----  (This part is usually written by another quote producer or external data feed)
-                      |
-                      v
-             +------------------+           +----------------------+         +----------------------+
-             |  QuoteConsumer   |  ----->   |  PriceCacheService   |  ---->  |      Redis           |
-             | (gateway-service)|  Kafka    | (gateway-service)    |  set    |  key: price:SYMBOL   |
-             +------------------+  consume  +----------------------+         +----------------------+
-                      |
-                      | WebSocket push (/topic/price, /topic/price/{symbol})
-                      v
-             +----------------------+
-             |  WebSocketConfig     |
-             |  + SimpMessagingTemp.|
-             +----------------------+
-                      |
-                      |                     HTTP
-                      |      +-------------------------------------+
-                      |      |         REST API (gateway)          |
-                      |      |  GET /api/price/{symbol}            |
-                      |      |  GET /api/price                     |
-                      v      +-------------------------------------+
-             +----------------------+                      +---------------------------+
-             |    gateway-service   |  <-----------------> |   Frontend (React)        |
-             |  (API + WebSocket    |    CORS: http://     | - Call /api/price         |
-             |   external entry)    |    localhost:5173    | - Connect /ws + subscribe |
-             +----------------------+                      |   /topic/price...        |
-                                                           +---------------------------+
+```mermaid
+flowchart TB
+    FE[Frontend]
 
+    subgraph SVC[Microservices]
+        QS[quote-service]
+        GS[gateway-service]
+        CS[candle-service]
+    end
+
+    subgraph INFRA[Infrastructure]
+        K[(Kafka)]
+        R[(Redis)]
+    end
+
+    subgraph API[External APIs]
+        FH[Finnhub]
+        AV[Alpha Vantage]
+        BN[Binance]
+    end
+
+    FE --> QS
+    FE --> GS
+    FE --> CS
+
+    QS --> FH
+    QS --> K
+
+    GS --> K
+    GS --> R
+
+    CS --> AV
+    CS --> BN
+
+```
 
 # Technology Stack
 
