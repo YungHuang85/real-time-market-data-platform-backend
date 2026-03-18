@@ -170,7 +170,7 @@ flowchart TB
 - `Kafka` serves as the event bus for real-time quote streaming, while `Redis` serves as the cache layer for the latest price data.
 
 
-
+---
 # Technology Stack
 
 ## Backend
