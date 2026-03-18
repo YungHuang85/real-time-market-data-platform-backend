@@ -193,16 +193,6 @@ flowchart TB
 
 ---
 
-# System Flow
-
-1. Market data is received from external APIs  
-2. `quote-service` publishes events to Kafka  
-3. Redis caches the latest market data  
-4. `gateway-service` pushes updates via WebSocket  
-5. React dashboard displays real-time market data  
-
----
-
 # Features
 
 - Real-time stock and crypto price streaming
